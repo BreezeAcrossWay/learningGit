@@ -1,71 +1,55 @@
 <template>
-  <div class="dashboard">
-    <div class="nav">
-      <ul class="ul_top">
-        <li @mouseenter="mouseover(1)"><p>肺结核</p></li>
-        <li @mouseenter="mouseover(2)"><p>肺结节</p></li>
-        <li @mouseenter="mouseover(3)"><p>喉咙</p></li>
-        <li @mouseenter="mouseover(4)"><p>新冠</p></li>
-      </ul>
-    </div>
-    <div class="content">
-      <ul class="ul_rt">
-        <li v-show="tag==1">
-          <img src="../../assets/imgs/index1.png" alt="">
-        </li>
-        <li v-show="tag==2">
-          <img src="../../assets/imgs/index2.png" alt="">
-        </li>
-        <li v-show="tag==3">
-          <img src="../../assets/imgs/index3.png" alt="">
-        </li>
-        <li v-show="tag==4">
-          <img src="../../assets/imgs/index4.png" alt="">
-        </li>
-      </ul>
-    </div>
-    <div class="card">
-      <div class="dark-select">
-        <el-select v-model="form.id" :popper-append-to-body="false" class="sel">
-          <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
-        </el-select>
+  <div class="dashboard-container">
+    <div class="dashboard">
+      <div class="nav">
+        <div v-for="i in 4" :key="i" class="navfa">
+          <span class="navson" @mouseenter="mouseover(i)">{{ lunarr[i-1] }}</span>
+        </div>
       </div>
-      <div class="cont">
-        <div v-if="form.id==1" class="content-box">
-          <el-button type="goon" size="small" style="width:40%;">{{ context[form.id-1].title[0] }}</el-button>
-          <p class="word">{{ context[form.id-1].text[0] }}
-          </p>
-          <el-button type="goon" size="small" style="width:40%;">{{ context[form.id-1].title[1] }}</el-button>
-          <p class="word">{{ context[form.id-1].text[1] }}
-          </p>
-          <el-button type="goon" size="small" style="width:40%;">{{ context[form.id-1].title[2] }}</el-button>
-          <p class="word">{{ context[form.id-1].text[2] }}
-          </p>
-          <el-button type="goon" size="small" style="width:40%;">{{ context[form.id-1].title[3] }}</el-button>
-          <p class="word">{{ context[form.id-1].text[3] }}
-          </p>
+      <div class="content">
+        <ul class="ul_rt">
+          <li v-show="tag==1" class="tt">
+            <img src="../../assets/imgs/index1.png" alt="">
+          </li>
+          <li v-show="tag==2">
+            <img src="../../assets/imgs/index2.png" alt="">
+          </li>
+          <li v-show="tag==3">
+            <img src="../../assets/imgs/index3.png" alt="">
+          </li>
+          <li v-show="tag==4">
+            <img src="../../assets/imgs/index4.png" alt="">
+          </li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="dark-select">
+          <el-select v-model="form.id" :popper-append-to-body="false" class="sel">
+            <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
+          </el-select>
         </div>
-        <div v-else-if="form.id==2" class="content-box">
-          <el-button type="goon" size="small" style="width:50%;">{{ context[form.id-1].title[0] }}</el-button>
-          <p class="word">{{ context[form.id-1].text[0] }}
-          </p>
-          <el-button type="goon" size="small" style="width:50%;">{{ context[form.id-1].title[1] }}</el-button>
-          <p class="word">{{ context[form.id-1].text[1] }}
-          </p>
-          <el-button type="goon" size="small" style="width:50%;">{{ context[form.id-1].title[2] }}</el-button>
-          <p class="word">{{ context[form.id-1].text[2] }}
-          </p>
-        </div>
-        <div v-else-if="form.id==3" class="content-box">
-          <el-button type="goon" size="small" style="width:55%;">{{ context[form.id-1].title[0] }}</el-button>
-          <p class="word">{{ context[form.id-1].text[0] }}
-          </p>
-          <el-button type="goon" size="small" style="width:55%;">{{ context[form.id-1].title[1] }}</el-button>
-          <p class="word">{{ context[form.id-1].text[1] }}
-          </p>
-          <el-button type="goon" size="small" style="width:55%;">{{ context[form.id-1].title[2] }}</el-button>
-          <p class="word">{{ context[form.id-1].text[2] }}
-          </p>
+        <div class="cont">
+          <div v-if="form.id==1" class="content-box">
+            <div v-for="item in 4" :key="item">
+              <el-button type="goon" size="small" style="width:40%;">{{ context[form.id-1].title[item-1] }}</el-button>
+              <p class="word">{{ context[form.id-1].text[item-1] }}
+              </p>
+            </div>
+          </div>
+          <div v-else-if="form.id==2" class="content-box">
+            <div v-for="item in 3" :key="item">
+              <el-button type="goon" size="small" style="width:50%;">{{ context[form.id-1].title[item-1] }}</el-button>
+              <p class="word">{{ context[form.id-1].text[item-1] }}
+              </p>
+            </div>
+          </div>
+          <div v-else-if="form.id==3" class="content-box">
+            <div v-for="item in 3" :key="item">
+              <el-button type="goon" size="small" style="width:55%;">{{ context[form.id-1].title[item-1] }}</el-button>
+              <p class="word">{{ context[form.id-1].text[item-1] }}
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -83,6 +67,7 @@ export default {
       form: {
         id: 1
       },
+      lunarr: ['肺结核', '肺结节', '喉咙', '新冠'],
       options: [{
         value: 1,
         label: '肺结核是什么'
@@ -135,48 +120,47 @@ export default {
 <style lang="scss" scoped>
 .dashboard {
   display: flex;
+  width:100%;
 }
 .nav {
   margin-top:230px;
-  margin-left: 0px;
   background-color:rgba(1,1,1,0.2);
   height:200px;
-  width:210px;
-  .ul_top {
-    li {
-      list-style: none;
-      width:130px;
-      text-align: center;
-      p {
-        color: #fff;
-        font-weight: 200;
-        font-size: 17px;
-        cursor: pointer;
-        line-height: 30px;
-        text-align: center;
-      }
+  flex-grow: 2;
+  .navfa {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin-top:16px;
+    .navson {
+      color: #fff;
+      font-weight: 300;
+      font-size: 14px;
+      cursor: pointer;
+      line-height: 30px;
+      //margin-left:20px;
     }
-    p:hover {
-      font-weight: 500;
-      opacity: 0.8;
-      font-size: 21px;
-    }
+  }
+  .navson:hover {
+    font-weight: 500;
+    font-size: 17px;
   }
 }
 .content {
+  //width:64%;
+  display:flex;
+  flex-grow: 1;
   .ul_rt {
-    li {
-      list-style: none;
-      img {
-        width:820px;
-        //margin:-260px 140px;
-        margin:100px 10px 100px -13px;
-      }
+    text-align: center;
+    list-style: none;
+    img {
+      width:820px;
+      margin-top: 100px;
+      justify-content: center;
     }
   }
 }
 .card {
-  width:300px;
   height:auto;
   background-color: rgba(228, 226, 226, 0.2);
   .dark-select {
