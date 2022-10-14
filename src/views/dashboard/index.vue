@@ -2,7 +2,7 @@
   <div class="dashboard-container">
     <div class="dashboard">
       <div class="nav">
-        <div v-for="i in 4" :key="i" class="navfa">
+        <div v-for="i in 4" :key="i" class="navfa" :class="{'navact': i==tab}" @click="goindex(i)">
           <span class="navson" @mouseenter="mouseover(i)">{{ lunarr[i-1] }}</span>
         </div>
       </div>
@@ -98,7 +98,8 @@ export default {
           '肺结核痰标本检测方法用时最短需要5-10分钟的时间，每个工作日，一名镜检人员的玻片阅读量不应超过25张，因此现行检测方式难以应对较大的检测需求。',
           '我国肺结核发病率为55.5491/100000，即每10万中有56人发病。中西部地区及农村地区肺结核发病率较高且三甲医院数量较少仅600-900家，可见诊疗压力极大。',
           '肺结核痰标本单次检验需要2000元以上，再加上附加费用，预估检测总费用将达到4000元，占深圳单月人均收入60%，需要反复检测，患者家庭面临较大的经济压力。']
-      }]
+      }],
+      tab: ''
     }
   },
   computed: {
@@ -112,6 +113,9 @@ export default {
   methods: {
     mouseover(d) {
       this.tag = d
+    },
+    goindex(i) {
+      this.tab = i
     }
   }
 }
@@ -127,6 +131,7 @@ export default {
   background-color:rgba(1,1,1,0.2);
   height:200px;
   flex-grow: 2;
+  width:20px;
   .navfa {
     display:flex;
     justify-content: center;
@@ -141,9 +146,11 @@ export default {
       //margin-left:20px;
     }
   }
+  .navact {
+    background-color: rgba(169, 182, 211, 0.2);
+  }
   .navson:hover {
-    font-weight: 500;
-    font-size: 17px;
+    font-weight: 600;
   }
 }
 .content {

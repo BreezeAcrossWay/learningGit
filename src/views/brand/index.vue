@@ -1,89 +1,132 @@
 <template>
   <div class="app-container">
-    <el-table :data="tableData" style="width: 100%">
-      <el-table-column label="ID" width="180">
-        <template slot-scope="scope">
-          <i class="el-icon-time"></i>
-          <span style="margin-left: 10px">{{ scope.row.id }}</span>
-        </template>
-      </el-table-column>
-
-      <el-table-column label="名称" width="180">
-        <template slot-scope="scope">
-          <el-popover trigger="hover" placement="top">
-            <p>首字母: {{ scope.row.letter }}</p>
-            <div slot="reference" class="name-wrapper">
-              <el-tag size="medium">{{ scope.row.name }}</el-tag>
-            </div>
-          </el-popover>
-        </template>
-      </el-table-column>
-      <el-table-column label="操作">
-        <template slot-scope="scope">
-          <!-- 点击按钮时，将id传入方法 -->
-          <el-button size="mini" @click="handleEdit(scope.row.id)"
-            >编辑</el-button
-          >
-          <el-button
-            size="mini"
-            type="danger"
-            @click="handleDelete(scope.row.id)"
-            >删除</el-button
-          >
-        </template>
-      </el-table-column>
-    </el-table>
-    <el-pagination
-      @current-change="changePage"
-      v-if="isShow"
-      background
-      layout="prev, pager, next"
-      :total="total"
-      :page-size="pageSize"
-    >
-    </el-pagination>
+    <div class="card">
+      <div>
+        <p class="title"><img src="@/assets/imgs/doctor.png" alt="">&nbsp;医生</p>
+      </div>
+      <div class="pho">
+        <p class="photo"><img src="@/assets/imgs/bg13.jpg" alt=""></p>
+      </div>
+      <div class="info">
+        <div class="box">
+          <span>Account</span>
+          <span>chenxin <img src="@/assets/imgs/user.png" alt=""></span>
+        </div>
+        <div class="box">
+          <span>Mail</span>
+          <span>miao <img src="@/assets/imgs/mail.png" alt=""></span>
+        </div>
+        <div class="box">
+          <span>Phone</span>
+          <span>miao <img src="@/assets/imgs/phone.png" alt=""></span>
+        </div>
+      </div>
+    </div>
+    <div class="func">
+      <div>
+        <p class="title"><img src="@/assets/imgs/doctor.png" alt="">&nbsp;核心功能</p>
+      </div>
+      <div class="add">
+        <div class="text">
+          <p>添加</p>
+          <p>疑似病患</p>
+        </div>
+        <div class="addimg"></div>
+      </div>
+      <div class="upload"></div>
+    </div>
   </div>
 </template>
 
 <script>
-import { getBrands, editBrand } from "@/api/brand.js";
-
-export default {
-  data() {
-    return {
-      total: 1,
-      pageSize:1,
-      // 默认不显示分页
-      isShow: false,
-      tableData: [],
-    };
-  },
-  created: function () {
-    getBrands().then((response) => {
-      this.tableData = response.data.items.records;
-      // 总记录数
-      this.total = response.data.items.total;
-      // 每页显示的条数
-      this.pageSize = response.data.items.size;
-      // 网络请求成功后，显示分页
-      this.isShow = true;
-    });
-  },
-  methods: {
-    handleEdit(id) {
-      console.log(id);
-      //跳转到添加页面，同时传递品牌id，方便在添加页面查询品牌信息，并显示
-      this.$router.push("/brand/edit/" + id);
-    },
-    handleDelete(id) {
-      // console.log(id);
-      // 删除
-    },
-    changePage(pageNum) {
-      getBrands(pageNum).then((response) => {
-        this.tableData = response.data.items.records;
-    });
-    },
-  },
-};
 </script>
+<style lang="scss" scoped>
+.app-container{
+  display:flex;
+}
+.card{
+  display:flex;
+  width:270px;
+  height:380px;
+  background-color: rgba(131, 122, 122, 0.1);
+  margin-top: 180px;
+  margin-left: 30px;
+  border-radius: 20px;
+  flex-direction: column;
+  .title{
+    color:#fff;
+    font-size:16px;
+    margin:17px 20px;
+    img{
+      width:20px;
+      height:20px;
+      vertical-align: sub;
+    }
+  }
+  .pho{
+    display:flex;
+    justify-content: center;
+    .photo{
+      margin-top: 5px;
+      img{
+        width:100px;
+        height:100px;
+        border-radius: 11px;
+      }
+    }
+  }
+  .info{
+    margin-top:-8px;
+    .box{
+      background-color: rgba(189, 181, 181, 0.2);
+      background-size: cover;
+      height:40px;
+      display:flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 20px;
+      span{
+        color:#fff;
+        margin:auto 15px;
+        img {
+          width:14px;
+          height:14px;
+        }
+      }
+    }
+  }
+}
+.func{
+  display:flex;
+  width:300px;
+  height:380px;
+  background-color: rgba(131, 122, 122, 0.1);
+  margin-top: 180px;
+  margin-left: 30px;
+  border-radius: 20px;
+  flex-direction: column;
+  .title{
+    color:#fff;
+    font-size:16px;
+    margin:17px 20px;
+    img{
+      width:20px;
+      height:20px;
+      vertical-align: sub;
+    }
+  }
+  .add{
+    background-color: red;
+    height:140px;
+    display:flex;
+    flex-wrap: wrap;
+    align-items: center;
+    .text{
+      p{
+        color:#fff;
+        line-height: 0.7;
+      }
+    }
+  }
+}
+</style>

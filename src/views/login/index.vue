@@ -1,9 +1,9 @@
 <template>
   <div class="login-container">
-    <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
-
+    <el-form ref="loginForm" :model="loginForm" class="login-form" auto-complete="on" label-position="left">
+      <!-- :rules="loginRules" -->
       <div class="title-container">
-        <h3 class="title">Health care system</h3>
+        <h3 class="title">HEALTH CARE SYSTEM</h3>
       </div>
 
       <el-form-item prop="username">
@@ -219,7 +219,7 @@ $light_gray:#eee;
     position: relative;
 
     .title {
-      font-size: 26px;
+      font:30px Merriweather, Georgia, serif;
       color: $light_gray;
       margin: -60px auto 40px auto;
       text-align: center;

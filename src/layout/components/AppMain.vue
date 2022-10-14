@@ -1,5 +1,5 @@
 <template>
-  <section class="app-main" :class="this.$route.path=='/dashboard'?'bgimg':''">
+  <section class="app-main" :class="this.$route.path=='/dashboard'?'bgimg':this.$route.path=='/brand/list'?'bgimg2':''">
     <transition name="fade-transform" mode="out-in">
       <router-view :key="key" />
     </transition>
@@ -27,6 +27,10 @@ export default {
 }
 .bgimg {
   background-image: url('../../assets/imgs/bg5.jpg');
+  background-size:cover;
+}
+.bgimg2 {
+  background-image: url('../../assets/imgs/bg7.jpg');
   background-size:cover;
 }
 .fixed-header+.app-main {
