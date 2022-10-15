@@ -35,6 +35,7 @@ const actions = {
       // 调用login方法发送网络请求
       login({ username: username.trim(), password: password }).then(response => {
         const { data } = response
+        data.token = 'TokenFromChenxin'
         // vuex
         commit('SET_TOKEN', data.token)
         setToken(data.token)

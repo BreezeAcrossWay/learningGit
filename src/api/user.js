@@ -4,7 +4,7 @@ export function login(data) {
   return request({
     url: '/user/login',
     method: 'post',
-    data  // {name=xx,xx=xx}
+    data // {name=xx,xx=xx}
   })
 }
 
@@ -20,5 +20,11 @@ export function logout() {
   return request({
     url: '/user/logout',
     method: 'post'
+  })
+}
+export function getPatient(token) {
+  return request({
+    url: '/user/patients',
+    method: 'get'
   })
 }
